@@ -31,7 +31,7 @@ def log(s):
     # Change conditional to True to log messages in a Debug process
     if False:
         now = datetime.datetime.now()
-        print(now.strftime("%H:%M:%S ") + s)
+        print(now.strftime("%H:%M:%S ") + str(s))
     pass
 
 
@@ -249,9 +249,14 @@ def find_all_occurrences(text, case_sensitive, whole_words):
     """
 
     opts = ('c' if case_sensitive else '') + ('w' if whole_words else '')
+
     log("Calling ed.action: EDACTION_FIND_ALL")
+
     res = ed.action(app.EDACTION_FIND_ALL, text, opts, opt.MAX_LINE_LEN)
     res = [r[:2] for r in res]
+
+    log('Number of matches: ' + str(len(res)))
+
     return res
 
 
